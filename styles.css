@@ -68,20 +68,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Ambient tech backdrop: subtle grid + drifting glow orbs */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -2;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-  background-size: 56px 56px;
-  mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, #000 30%, transparent 90%);
-  -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, #000 30%, transparent 90%);
-  pointer-events: none;
-}
+/* Ambient tech backdrop: drifting glow orbs */
 body::after {
   content: "";
   position: fixed;
@@ -971,7 +958,6 @@ button { font-family: inherit; cursor: pointer; }
 /* Phones */
 @media (max-width: 640px) {
   body { font-size: 16px; }
-  body::before { background-size: 40px 40px; }
   .container { padding-inline: 20px; }
   .section { padding: clamp(56px, 14vw, 88px) 0; }
 
