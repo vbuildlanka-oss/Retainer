@@ -244,11 +244,28 @@ button { font-family: inherit; cursor: pointer; }
   background: rgba(7, 8, 15, 0.78);
 }
 .nav {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 74px;
 }
+
+/* Mobile menu toggle (hidden on desktop) */
+.nav-toggle {
+  display: none;
+  place-items: center;
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  background: var(--glass-2);
+  border: 1px solid var(--glass-bd);
+  color: #fff;
+  transition: border-color 0.3s var(--ease), background-color 0.3s var(--ease);
+}
+.nav-toggle:hover { border-color: var(--glass-bd2); }
+.nav-toggle .icon-close { display: none; }
+.site-header.nav-open .nav-toggle .icon-open { display: none; }
+.site-header.nav-open .nav-toggle .icon-close { display: block; }
 .brand {
   display: inline-flex;
   align-items: center;
@@ -328,8 +345,9 @@ button { font-family: inherit; cursor: pointer; }
   font-family: var(--display);
   font-weight: 600;
   font-size: clamp(2.6rem, 7vw, 4.9rem);
-  line-height: 1.03;
-  letter-spacing: -0.03em;
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
   margin: 24px 0 0;
   color: #fff;
 }
@@ -550,6 +568,7 @@ button { font-family: inherit; cursor: pointer; }
 
 .table-scroll {
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   border-radius: var(--radius);
   border: 1px solid var(--glass-bd);
   background: var(--glass);
@@ -899,24 +918,98 @@ button { font-family: inherit; cursor: pointer; }
 /* =========================================================
    RESPONSIVE
    ========================================================= */
+
+/* Tablet / small desktop — stack the multi-column grids */
 @media (max-width: 920px) {
-  .pricing-grid { grid-template-columns: 1fr; max-width: 480px; margin-inline: auto; gap: 30px; }
+  .pricing-grid { grid-template-columns: 1fr; max-width: 460px; margin-inline: auto; gap: 26px; }
   .plan-featured { padding: 40px 32px; }
-  .summary-grid { grid-template-columns: 1fr; max-width: 480px; margin-inline: auto; }
+  .summary-grid { grid-template-columns: 1fr; max-width: 460px; margin-inline: auto; }
   .faq-inner { grid-template-columns: 1fr; }
   .faq-aside { position: static; }
   .faq-aside .section-title { text-align: left; }
   .cta-card { grid-template-columns: 1fr; gap: 32px; }
 }
 
+/* Collapse nav into a glass dropdown menu */
+@media (max-width: 760px) {
+  .nav { height: 66px; }
+  .nav-toggle { display: inline-grid; }
+  .nav-links {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0; right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    padding: 12px;
+    border-radius: 16px;
+    background: rgba(9, 11, 20, 0.97);
+    border: 1px solid var(--glass-bd);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-10px) scale(0.98);
+    transform-origin: top center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.28s var(--ease), transform 0.28s var(--ease), visibility 0.28s var(--ease);
+  }
+  .site-header.nav-open .nav-links {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+  .nav-links a {
+    padding: 13px 15px;
+    border-radius: 11px;
+    font-size: 1rem;
+    color: var(--text);
+  }
+  .nav-links a:hover, .nav-links a:active { background: var(--glass); }
+  .nav-cta { justify-content: center; text-align: center; margin-top: 4px; }
+}
+
+/* Phones */
 @media (max-width: 640px) {
   body { font-size: 16px; }
-  body::before { background-size: 42px 42px; }
-  .nav-links { gap: 16px; }
-  .nav-links a:not(.nav-cta) { display: none; }
+  body::before { background-size: 40px 40px; }
+  .container { padding-inline: 20px; }
+  .section { padding: clamp(56px, 14vw, 88px) 0; }
+
+  .hero { padding: 92px 0 60px; }
+  .hero-title { font-size: clamp(2rem, 9.5vw, 3rem); letter-spacing: -0.01em; }
+  .hero-title br { display: none; }
+  .hero-sub { font-size: 1.02rem; margin-top: 20px; }
+  .hero-cta { margin-top: 30px; }
   .hero-cta .btn, .cta-actions .btn { width: 100%; }
+  .hero-trust { margin-top: 34px; gap: 12px 20px; }
+
+  .section-lead { font-size: 1rem; }
+
+  .plan { padding: 28px 22px; }
+  .plan-featured { padding: 34px 24px; }
+  .price-amount { font-size: 2.6rem; }
+  .pricing-note { text-align: left; }
+
+  .cta-card { padding: 30px 22px; }
+  .cta-panel { padding: 22px 20px; }
+
   .faq-list { padding: 4px 18px; }
+  .faq-q { font-size: 1.06rem; padding: 20px 2px; }
+  .faq-a p { padding-right: 6px; }
+
   .footer-inner { flex-direction: column; }
+  .footer-bottom { flex-direction: column; gap: 8px; }
+}
+
+/* Small phones */
+@media (max-width: 380px) {
+  .container { padding-inline: 16px; }
+  .hero-title { font-size: 1.85rem; }
+  .price-amount { font-size: 2.35rem; }
+  .compare-toggle { width: 100%; }
+  .toggle-btn { flex: 1; padding: 10px 10px; font-size: 0.85rem; }
+  .btn { --btn-px: 20px; }
 }
 
 /* Reduced motion */
