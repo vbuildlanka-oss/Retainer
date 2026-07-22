@@ -172,12 +172,33 @@
         </div>
 
         <div class="compare-toggle" role="tablist" aria-label="Comparison view">
-          <button class="toggle-btn is-active" role="tab" aria-selected="true" data-view="table">Comparison table</button>
-          <button class="toggle-btn" role="tab" aria-selected="false" data-view="cards">Quick summary</button>
+          <button class="toggle-btn is-active" role="tab" aria-selected="true" data-view="cards">Quick summary</button>
+          <button class="toggle-btn" role="tab" aria-selected="false" data-view="table">Comparison table</button>
+        </div>
+
+        <!-- Quick summary view (shown first) -->
+        <div class="compare-panel" data-panel="cards" data-reveal>
+          <div class="summary-grid">
+            <div class="summary-card">
+              <h3>Essentials</h3>
+              <p>Best for stable sites that just need to stay healthy, secure, and backed up.</p>
+              <span class="summary-tag">2 hrs / month</span>
+            </div>
+            <div class="summary-card summary-featured">
+              <h3>Growth <i data-lucide="sparkles"></i></h3>
+              <p>Best for growing businesses that want steady improvements and fast support.</p>
+              <span class="summary-tag">8 hrs / month</span>
+            </div>
+            <div class="summary-card">
+              <h3>Premium</h3>
+              <p>Best for teams treating their site as a channel — experiments, features, strategy.</p>
+              <span class="summary-tag">20 hrs / month</span>
+            </div>
+          </div>
         </div>
 
         <!-- Table view -->
-        <div class="compare-panel" data-panel="table" data-reveal>
+        <div class="compare-panel is-hidden" data-panel="table" data-reveal>
           <div class="table-scroll">
             <table class="compare-table">
               <thead>
@@ -259,27 +280,6 @@
                 </tr>
               </tfoot>
             </table>
-          </div>
-        </div>
-
-        <!-- Cards summary view (hidden by default) -->
-        <div class="compare-panel is-hidden" data-panel="cards" data-reveal>
-          <div class="summary-grid">
-            <div class="summary-card">
-              <h3>Essentials</h3>
-              <p>Best for stable sites that just need to stay healthy, secure, and backed up.</p>
-              <span class="summary-tag">2 hrs / month</span>
-            </div>
-            <div class="summary-card summary-featured">
-              <h3>Growth <i data-lucide="sparkles"></i></h3>
-              <p>Best for growing businesses that want steady improvements and fast support.</p>
-              <span class="summary-tag">8 hrs / month</span>
-            </div>
-            <div class="summary-card">
-              <h3>Premium</h3>
-              <p>Best for teams treating their site as a channel — experiments, features, strategy.</p>
-              <span class="summary-tag">20 hrs / month</span>
-            </div>
           </div>
         </div>
       </div>
